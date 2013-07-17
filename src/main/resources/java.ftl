@@ -20,11 +20,11 @@ public class ${className} implements java.io.Serializable {
 
 <#list columns as column>
     public void set${column.fieldName?cap_first}(${column.fieldType} ${column.fieldName}){
-        this.${column.fieldName} = ${column.fieldName}
+        this.${column.fieldName} = ${column.fieldName};
     }
 
     public ${column.fieldType} get${column.fieldName?cap_first}(){
-        return this.${column.fieldName}
+        return this.${column.fieldName};
     }
 </#list>
 }

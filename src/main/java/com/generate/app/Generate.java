@@ -35,7 +35,26 @@ public class Generate {
             String tableName = tableList.get(i);
             generate.generateXml(tableName);
             generate.generateJava(tableName);
+            generate.generateDao(tableName);
+            generate.generateDaoImpl(tableName);
+            generate.generateService(tableName);
         }
+    }
+
+    private void generateService(String tableName) throws Exception {
+        String java = runFreemarker(tableName, "daoImpl.ftl");
+        String classPackage = Config.getInstance().get("class_package").replace(".", "/") + "/" + getClassName(tableName) + "Service.java";
+        FileUtil.writeToFile(classPackage, java);
+    }
+    private void generateDaoImpl(String tableName) throws Exception {
+        String java = runFreemarker(tableName, "daoImpl.ftl");
+        String classPackage = Config.getInstance().get("class_package").replace(".", "/") + "/" + getClassName(tableName) + "DAOBean.java";
+        FileUtil.writeToFile(classPackage, java);
+    }
+    private void generateDao(String tableName) throws Exception {
+        String java = runFreemarker(tableName, "dao.ftl");
+        String classPackage = Config.getInstance().get("class_package").replace(".", "/") + "/" + getClassName(tableName) + "DAO.java";
+        FileUtil.writeToFile(classPackage, java);
     }
 
     private List<String> getTableList(String tableExpress) {
@@ -161,7 +180,9 @@ public class Generate {
         if ("datetime".equals(dataType)) {
             return "Date";
         }
-        if ("decimal".equals(dataType)) {
+        if ("decimal".equals(dataType)
+                || "double".equals(dataType)
+                ) {
             return "Double";
         }
         return dataType;
