@@ -22,7 +22,7 @@ import javax.persistence.PersistenceContext;
 @Local({${className}DAO.class})
 @TransactionAttribute(TransactionAttributeType.SUPPORTS)
 @PermitAll
-public class ${className}DAOBean extends GenericVIHibernateDaoImpl<${className}, Integer> implements <${className}DAO {
+public class ${className}DAOBean extends GenericVIHibernateDaoImpl<${className}, Integer> implements ${className}DAO {
     private static final Logger logger = Logger.getLogger(${className}DAOBean.class);
 
     @PersistenceContext(unitName = "entityManagerCS")

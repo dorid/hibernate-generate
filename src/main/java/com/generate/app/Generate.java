@@ -189,7 +189,7 @@ public class Generate {
     }
 
     private String getSQLDataType(String dataType) {
-        if (dataType.equals("varchar") || dataType.equals("longtext")) {
+        if (dataType.equals("varchar") || dataType.equals("longtext") || dataType.equals("char")) {
             return "string";
         }
 
